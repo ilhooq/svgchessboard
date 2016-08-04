@@ -1,4 +1,11 @@
+# Don't exclude these dirs
+!bower_components/svg.draggable.js
+!bower_components/svg.js
 
-/bower_components
+# Ignore everything in these dir
+bower_components/svg.draggable.js/*
+bower_components/svg.js/*
 
-*.zip
+# But not these dirs
+!/bower_components/svg.draggable.js/dist
+!/bower_components/svg.js/dist
