@@ -1,0 +1,6 @@
+{
+  "name": "svgchessboard-github",
+  "dependencies": {
+    "svg.chessboard.js": "^0.0.1"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "svg.chessboard.js",
+  "version": "0.0.1",
+  "authors": [
+    "ilhooq <contact@sphilip.com>"
+  ],
+  "description": "Embed a chess board in your Web page using Javascript and SVG",
+  "keywords": [
+    "chess",
+    "chessboard",
+    "svg"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "svg.js": "~2.3.2",
+    "svg.draggable.js": "~2.2.0"
+  },
+  "homepage": "https://github.com/ilhooq/svgchessboard",
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.1",
+    "commit": "497bfa5b8d72c9834bec3e9f7998d14e73cd27d7"
+  },
+  "_source": "https://github.com/ilhooq/svgchessboard.git",
+  "_target": "^0.0.1",
+  "_originalSource": "svg.chessboard.js",
+  "_direct": true
+}

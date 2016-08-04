@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Chessboard SVG</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style type="text/css">
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #board {
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .coords {
+      font-size: 20px;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <!-- The SVG Board container -->
+      <div id="board"></div>
+    </div>
+    <div class="col-md-3">
+      <div id="toolbar">
+        <form>
+          <h1><small>Board settings</small></h1>
+          <div class="form-group">
+            <button type="button" class="btn btn-primary" onclick="board.rotate()">Rotate</button>
+          </div>
+          <div class="form-group">
+            <label for="board-style">Board style</label>
+            <select onchange="board.setSquareStyle(this.value)" class="form-control" id="board-style">
+              <option value="aluminium">Aluminium</option>
+              <option value="cherry">Cherry</option>
+              <option value="lapis">Lapis</option>
+              <option value="marble">Marble</option>
+              <option value="sand">Sand</option>
+              <option value="slate">Slate</option>
+              <option value="wood">Wood</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="white-square-color">White squares color</label>
+            <input type="color" class="form-control" value="#F0EAB9" onchange="board.setSquaresColor(this.value)" id="white-square-color" />
+          </div>
+          <div class="form-group">
+            <label for="black-square-color">black squares color</label>
+            <input type="color" class="form-control" value="#CA906E" onchange="board.setSquaresColor(null, this.value)" id="black-square-color" />
+          </div>
+          <div class="form-group">
+            <label for="piece-style">Piece style</label>
+            <select onchange="board.setPieceStyle(this.value)" class="form-control" id="piece-style">
+              <option value="alpha">Alpha</option>
+              <option value="alpha-outline">Alpha outline</option>
+              <option value="alpha-outline-shadow">Alpha outline + shadow</option>
+              <option value="berlin">Berlin</option>
+              <option value="berlin-outline">Berlin outline</option>
+              <option value="berlin-outline-shadow">Berlin outline + shadow</option>
+              <option value="leipzig">Leipzig</option>
+              <option value="leipzig-outline">Leipzig outline</option>
+              <option value="leipzig-outline-shadow">Leipzig outline + shadow</option>
+              <option value="merida">Merida</option>
+              <option value="merida-outline">Merida outline</option>
+              <option value="merida-outline-shadow">Merida + shadow</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="default-comment-color">Default comment color</label>
+            <input type="color" class="form-control" value="#00ff00" onchange="board.options.comment.defaultColor = this.value" id="default-comment-color" />
+          </div>
+          <div class="form-group">
+            <label for="shift-comment-color">Shift comment color</label>
+            <input type="color" class="form-control" value="#ffff00" onchange="board.options.comment.shiftColor = this.value" id="shift-comment-color" />
+          </div>
+          <div class="form-group">
+            <label for="alt-comment-color">Alt comment color</label>
+            <input type="color" class="form-control" value="#FF0000" onchange="board.options.comment.altColor = this.value" id="alt-comment-color" />
+          </div>
+          <h2><small>Help</small></h2>
+          <p>
+          To highlight a square with the default comment color : Press the <strong>Ctrl key</strong> then <strong>click</strong> on a square. <br>
+          To draw an arrow with the default comment color : Press the <strong>Ctrl key</strong> then <strong>draw a line</strong> from a to b. <br>
+          Also, you can :<br>
+          - Press <strong>Ctrl+Shift</strong> to have Shift comment color<br>
+          - Press <strong>Ctrl+Alt</strong> to have Alt comment color.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<script type="text/javascript" src="../bower_components/svg.js/dist/svg.min.js"></script>
+<script type="text/javascript" src="../bower_components/svg.draggable.js/dist/svg.draggable.min.js"></script>
+<script type="text/javascript" src="../bower_components/svg.chessboard.js/svg.chessboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
+
+
+<script type="text/javascript">
+var board;
+
+window.onload = function() {
+  board = new SvgChessBoard('board', {
+    margin : 60,
+    themePath: '/bower_components/svg.chessboard.js/themes',
+    squareStyle : 'wood',
+    pieceStyle : 'merida-outline-shadow'
+  });
+
+  var typesCorrespondance = {
+    'p' : 'Pawn',
+    'n' : 'Knight',
+    'b' : 'Bishop',
+    'r' : 'Rook',
+    'q' : 'Queen',
+    'k' : 'King'
+  };
+
+  var position = new Chess();
+   // Put pieces on board
+  for (var i=0, piece= null; i < board.coordinates.length ; i++) {
+    piece = position.get(board.coordinates[i]);
+    if (piece && typesCorrespondance[piece.type]) {
+      board.addPiece(piece.color + typesCorrespondance[piece.type], board.coordinates[i]);
+    }
+  }
+};
+</script>
+
+</body>
+</html>
+
+
